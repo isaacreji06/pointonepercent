@@ -14,9 +14,10 @@ import {
 
 export const NavbarDemo = () => {
   const navItems = [
-    { name: "Features", link: "#features" },
-    { name: "Pricing", link: "#pricing" },
+    { name: "Our Work", link: "#work" },
+    { name: "Our Services", link: "#projects" },
     { name: "Contact", link: "#contact" },
+    { name: "About Us", link: "#about" },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -29,8 +30,7 @@ export const NavbarDemo = () => {
           <NavbarLogo />
           <NavItems items={navItems} />
           <div className="flex items-center gap-4">
-            <NavbarButton variant="secondary">Login</NavbarButton>
-            <NavbarButton variant="primary">Book a call</NavbarButton>
+            <NavbarButton variant="primary">GET IN TOUCH</NavbarButton>
           </div>
         </NavBody>
 
@@ -86,8 +86,8 @@ export const NavbarDemo = () => {
 const DummyContent = () => {
   return (
     <div className="container mx-auto p-8 pt-24">
-      <h1 className="mb-4 text-center text-3xl font-bold text-white">
-        Check the navbar at the top of the container
+      <h1 className="mb-4 text-center text-6xl font-bold text-white">
+      Just 0.01% effort. Total impact.
       </h1>
       <p className="mb-10 text-center text-sm text-gray-400">
         For demo purposes we have kept the position as{" "}

@@ -14,8 +14,8 @@ import {
 
 export const NavbarDemo = () => {
   const navItems = [
-    { name: "Our Work", link: "#work" },
-    { name: "Our Services", link: "#projects" },
+    { name: "Work", link: "#work" },
+    { name: "Services", link: "#projects" },
     { name: "Contact", link: "#contact" },
     { name: "About Us", link: "#about" },
   ];

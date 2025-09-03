@@ -1,11 +1,8 @@
-"use client";;
+"use client";
 import { cn } from "../../lib/util";
 import { IconMenu2, IconX } from "@tabler/icons-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import logo from "../../assets/logo.png";
-
 import React, { useRef, useState } from "react";
-
 
 export const Navbar = ({
   children,
@@ -29,8 +26,7 @@ export const Navbar = ({
   return (
     <motion.div
       ref={ref}
-      // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
-      className={cn("sticky inset-x-0 top-20 z-40 w-full", className)}>
+      className={cn("sticky inset-x-0 top-0 z-40 w-full", className)}>
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
           ? React.cloneElement(child, { visible })
@@ -52,7 +48,8 @@ export const NavBody = ({
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
         width: visible ? "40%" : "100%",
-        y: visible ? 20 : 0,
+        y: visible ? 0 : 0,
+        height: visible ? "70px" : "100px",
       }}
       transition={{
         type: "spring",
@@ -83,7 +80,7 @@ export const NavItems = ({
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
         className
       )}>
       {items.map((item, idx) => (
@@ -121,7 +118,8 @@ export const MobileNav = ({
         paddingRight: visible ? "12px" : "0px",
         paddingLeft: visible ? "12px" : "0px",
         borderRadius: visible ? "4px" : "2rem",
-        y: visible ? 20 : 0,
+        y: visible ? 0 : 0,
+        height: visible ? "60px" : "80px",
       }}
       transition={{
         type: "spring",
@@ -144,7 +142,7 @@ export const MobileNavHeader = ({
 }) => {
   return (
     <div
-      className={cn("flex w-full flex-row items-center justify-between", className)}>
+      className={cn("flex w-full flex-row items-center justify-between px-4", className)}>
       {children}
     </div>
   );
@@ -164,7 +162,7 @@ export const MobileNavMenu = ({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className={cn(
-            "absolute inset-x-0 top-16 z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-white px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-neutral-950",
+            "absolute inset-x-0 top-full z-50 flex w-full flex-col items-start justify-start gap-4 rounded-lg bg-white px-4 py-8 shadow-[0_0_24px_rgba(34,_42,_53,_0.06),_0_1px_1px_rgba(0,_0,_0,_0.05),_0_0_0_1px_rgba(34,_42,_53,_0.04),_0_0_4px_rgba(34,_42,_53,_0.08),_0_16px_68px_rgba(47,_48,_55,_0.05),_0_1px_0_rgba(255,_255,_255,_0.1)_inset] dark:bg-neutral-950",
             className
           )}>
           {children}
@@ -185,18 +183,78 @@ export const MobileNavToggle = ({
   );
 };
 
-export const NavbarLogo = () => {
+export const NavbarLogo = ({ visible }) => {
   return (
-    <a
-      href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black">
-      <img
-        src={logo}
-        alt="logo"
-        width={40}
-        height={40} />
-      <span className="font-medium text-black dark:text-white">PointOnePercent</span>
-    </a>
+    <motion.div
+      className="flex items-center"
+      animate={{
+        scale: visible ? 0.8 : 1,
+      }}
+      transition={{ type: "spring", stiffness: 200, damping: 25 }}
+    >
+      <a
+        href="#"
+        className="relative z-20 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      >
+        {/* Logo circle */}
+        <motion.div
+          animate={{
+            width: visible ? 40 : 60,
+            height: visible ? 40 : 60,
+          }}
+          transition={{ type: "spring", stiffness: 200, damping: 25 }}
+          className="relative flex items-center justify-center"
+        >
+          <motion.div
+            animate={{
+              borderWidth: visible ? 2 : 4,
+            }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            className="absolute w-full h-full border-white rounded-full animate-slowspin"
+            style={{
+              WebkitMask: `conic-gradient(
+                #000 0deg 40deg, transparent 40deg 60deg,
+                #000 60deg 100deg, transparent 100deg 120deg,
+                #000 120deg 160deg, transparent 160deg 180deg,
+                #000 180deg 220deg, transparent 220deg 240deg,
+                #000 240deg 280deg, transparent 280deg 300deg,
+                #000 300deg 340deg, transparent 340deg 360deg
+              )`,
+              mask: `conic-gradient(
+                #000 0deg 40deg, transparent 40deg 60deg,
+                #000 60deg 100deg, transparent 100deg 120deg,
+                #000 120deg 160deg, transparent 160deg 180deg,
+                #000 180deg 220deg, transparent 220deg 240deg,
+                #000 240deg 280deg, transparent 280deg 300deg,
+                #000 300deg 340deg, transparent 340deg 360deg
+              )`,
+            }}
+          ></motion.div>
+
+          <motion.p
+            animate={{
+              fontSize: visible ? "0.9rem" : "1.2rem",
+            }}
+            transition={{ type: "spring", stiffness: 200, damping: 25 }}
+            className="text-white font-raleway font-extrabold"
+          >
+            .1%
+          </motion.p>
+        </motion.div>
+
+        {/* Brand text */}
+        <motion.span
+          animate={{
+            fontSize: visible ? "1rem" : "1.5rem",
+            opacity: visible ? 1 : 1,
+          }}
+          transition={{ type: "spring", stiffness: 200, damping: 25 }}
+          className="font-medium text-black dark:text-white"
+        >
+          PointOnePercent
+        </motion.span>
+      </a>
+    </motion.div>
   );
 };
 
